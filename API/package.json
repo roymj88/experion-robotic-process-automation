@@ -1,0 +1,40 @@
+{
+  "name": "rpa-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "bcryptjs": "^2.4.0",
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "~4.7.5",
+    "morgan": "~1.7.0",
+    "nodemailer": "^2.7.0",
+    "q": "~1.4.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "API for invoice parsing dashbord(RPA)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VishnuGurudathan"
+  },
+  "keywords": [
+    "RPA",
+    "Invoice"
+  ],
+  "author": "vishnu.g",
+  "license": "BSD-2-Clause"
+}

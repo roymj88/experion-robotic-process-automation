@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-  .controller('LogoutController', function ($state, $ngBootbox) {
+  .controller('LogoutController', function ($state) {
 
     var vm = this;
 

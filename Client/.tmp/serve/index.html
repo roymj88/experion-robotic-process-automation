@@ -2,7 +2,7 @@
 <html ng-app="inspinia">
   <head>
     <meta charset="utf-8">
-    <title>inspinia</title>
+    <title>Experion Robotic Process Automation Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,16 +44,25 @@
     <script src="../bower_components/moment/moment.js"></script>
     <script src="../bower_components/pace/pace.js"></script>
     <script src="../bower_components/metisMenu/dist/metisMenu.js"></script>
+    <script src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+    <script src="../bower_components/highcharts/highcharts.js"></script>
+    <script src="../bower_components/angular-smart-table/dist/smart-table.js"></script>
+    <script src="../bower_components/bootbox/bootbox.js"></script>
+    <script src="../bower_components/ngBootbox/dist/ngBootbox.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
     <script src="app/index.module.js"></script>
+    <script src="app/main/main.service.js"></script>
     <script src="app/main/main.controller.js"></script>
+    <script src="app/main/dashboard.controller.js"></script>
     <script src="app/login/logout.controller.js"></script>
     <script src="app/login/login.service.js"></script>
     <script src="app/login/login.controller.js"></script>
+    <script src="app/invoices/invoices.service.js"></script>
+    <script src="app/invoices/invoices.controller.js"></script>
     <script src="app/forgot-password/forgotpassword.controller.js"></script>
     <script src="app/inspinia.js"></script>
     <script src="app/index.run.js"></script>

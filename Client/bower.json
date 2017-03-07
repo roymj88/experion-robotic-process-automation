@@ -18,7 +18,11 @@
     "angular": "~1.5.0",
     "pace": "~1.0.2",
     "metisMenu": "~2.0.2",
-    "fontawesome": "~4.5.0"
+    "fontawesome": "~4.5.0",
+    "highcharts-ng": "^1.0.0",
+    "highcharts": "^5.0.7",
+    "angular-smart-table": "^2.1.8",
+    "ngBootbox": "^0.1.4"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0"

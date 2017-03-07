@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated "><!-- fadeInRight -->
     <div class="row">
         <div class="col-lg-12">
             <div class="text-center m-t-lg">
@@ -7,10 +7,165 @@
                 </h1>
                 <small>
                     {{main.descriptionText}}
-
-                    <i class="glyphicon glyphicon-pencil"></i>
                 </small>
             </div>
+            <br>
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label label-success pull-right">Monthly</span>
+                                    <h5>Users</h5>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <span class="text-center" ng-if="dc.cardsPromise">Loading...</span>
+                                    
+                                    <span ng-if="!dc.cardsPromise">
+                                        <h1 class="no-margins" ng-bind="dc.cardsData.user_count"></h1>
+                                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                                        <small>Total users</small>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label label-info pull-right">Annual</span>
+                                    <h5>Files</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins" ng-bind="dc.cardsData.total_files"></h1>
+                                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                                    <small>New files</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label label-primary pull-right">Today</span>
+                                    <h5>Parsed</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins" ng-bind="dc.cardsData.parsed_count"></h1>
+                                    <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                                    <small>Total parsed</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label label-danger pull-right">Annual</span>
+                                    <h5>Unparsed</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <h1 class="no-margins" ng-bind="dc.cardsData.unparsed_count"></h1>
+                                    <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                                    <small>total unparsed</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                Total Invoices(month-wise)
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+                                <span ng-if="!dc.graphPromise">
+                                    <highchart id="chart1" config="dc.graphOptions"></highchart>
+                                </span>
+                                <div class="text-center" ng-if="dc.graphPromise">
+                                    Loading...
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-6">
+ 
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                Total Invoices(percentage)
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+                                <span>
+                                    <highchart id="chart1" config="dc.dashboardPieOptions"></highchart>
+                                </span>
+                                <div class="text-center">
+                                    Loading...
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                Last 10 Transactions
+                                <div ibox-tools></div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="text-center" ng-if="dc.latestInvoicesPromise">Loading...</div>
+
+                                <span ng-if="!dc.latestInvoicesPromise">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>File</th>
+                                                <th>Issuer</th>
+                                                <th>Partner</th>
+                                                <th>Invoice No</th>
+                                                <th>Processed Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="row in dc.latestInvoicesData | orderBy:'processed_date' | limitTo: 10">
+                                                <td class="text-capitalize">{{row.username}}</td>
+                                                <td class="text-capitalize">{{row.file_name}}</td>
+                                                <td>{{row.issuer}}</td>
+                                                <td>{{row.partner_name}}</td>
+                                                <td>{{row.invoice_number}}</td>
+                                                <td class="text-capitalize">{{row.processed_date | date}}</td>
+                                                <td class="text-capitalize">
+                                                    <small ng-if="row.parsed" class="label label-primary"><i class="fa fa-check"></i> Parsed</small>
+                                                    <small ng-if="!row.parsed" class="label label-danger"><i class="fa fa-times"></i> Unparsed</small>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+
+                                </span>
+                                
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+
+
+            </div>
+
         </div>
     </div>
 </div>

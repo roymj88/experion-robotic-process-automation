@@ -105,10 +105,10 @@
                                 <div ibox-tools></div>
                             </div>
                             <div class="ibox-content">
-                                <span>
+                                <span ng-if="!dc.cardsPromise">
                                     <highchart id="chart1" config="dc.dashboardPieOptions"></highchart>
                                 </span>
-                                <div class="text-center">
+                                <div class="text-center" ng-if="dc.cardsPromise">
                                     Loading...
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
 
                     </div>
                 </div>
-
+                
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">

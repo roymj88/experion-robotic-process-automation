@@ -21,6 +21,42 @@ angular.module('inspinia')
      		return deferred.promise;
   		};
 
+  		var getInvoiceDataObj = function() {
+     		var deferred = $q.defer();
+     		
+     		var req = {
+			 	method: 'GET',
+				url: API_URL+ 'admin/dash-graph-details',
+			};
+			
+			$http(req).then(function(data){
+				deferred.resolve(data);
+			}, function(msg, code){
+				deferred.reject(msg);
+				$log.error(msg, code);
+			});
+     		
+     		return deferred.promise;
+  		};
+
+  		var getParsedDataObj = function(){
+  			var deferred = $q.defer();
+     		
+     		var req = {
+			 	method: 'GET',
+				url: API_URL+ 'admin/dash-parsed-details',
+			};
+			
+			$http(req).then(function(data){
+				deferred.resolve(data);
+			}, function(msg, code){
+				deferred.reject(msg);
+				$log.error(msg, code);
+			});
+     		
+     		return deferred.promise;
+  		}
+
   		var getLatestInvoicesDataObj = function(){
   			var deferred = $q.defer();
      		
@@ -43,7 +79,9 @@ angular.module('inspinia')
 
 	return {
   		getCardsDataRequest: getCardDataObj,
-  		getLatestInvoicesDataRequest: getLatestInvoicesDataObj
+  		getLatestInvoicesDataRequest: getLatestInvoicesDataObj,
+  		getInvoiceDataRequest: getInvoiceDataObj,
+  		getParsedDataRequest: getParsedDataObj
 	}
 	
 });

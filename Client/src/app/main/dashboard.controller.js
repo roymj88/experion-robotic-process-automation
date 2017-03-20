@@ -10,22 +10,119 @@ angular.module('inspinia')
     mainService.getCardsDataRequest().then(function(result){
 		vm.cardsData = result.data.data;
 		vm.cardsPromise = false;
+		console.log(result.data.data);
+
+		var parsed_count = result.data.data.parsed_count;
+		var unparsed_count = result.data.data.unparsed_count;
+		var total = result.data.data.total_files;
+		
+		var parsedPercent = (parsed_count/total)*100;
+		var unparsedPercent = (unparsed_count/total)*100;
+
+		var dashboardPieOptions =  {
+	        chart: {
+	            plotBackgroundColor: null,
+	            plotBorderWidth: null,
+	            plotShadow: false,
+	            type: 'pie'
+	        },
+	        title: {
+	            text: ''
+	        },
+	        tooltip: {
+	            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	        },
+	        plotOptions: {
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        },
+	        series: [{
+	            name: 'Brands',
+	            colorByPoint: true,
+	            data: [{
+	                name: 'Parsed',
+	                y: parsedPercent
+	            }, {
+	                name: 'Unparsed',
+	                y: unparsedPercent,
+	                sliced: true,
+	                selected: true
+	            }]
+	        }]
+	    };
+		vm.dashboardPieOptions = dashboardPieOptions;
+
+
 	});
 
-	vm.graphPromise = true;
-    // mainService.getGraphDataRequest().then(function(result){
-		// var graphDataCategories = result.data.data.categories;
-		// var graphDataSeries = result.data.data.series;
-		var graphDataCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-		var graphDataSeries = [{
-	        name: 'Parsed',
-	        data: [70, 69, 95, 145, 184, 215, 252, 265, 233, 183, 139, 96]
-	    }, {
-	        name: 'Unparsed',
-	        data: [39, 42, 57, 85, 119, 152, 170, 166, 142, 103, 66, 48]
-	    }];
+	vm.getInvoiceDataPromise = true;
 
-		vm.graphPromise = false;
+	// mainService.getInvoiceDataRequest().then(function(invoiceData){
+		var invoiceData = {
+		    "status": 1,
+		    "message": "Successfully loaded dash info",
+		    "code": 200,
+		    "data": {
+		        "categories": [
+		            "Jan",
+		            "Feb",
+		            "Mar",
+		            "Apr",
+		            "May",
+		            "Jun",
+		            "Jul",
+		            "Aug",
+		            "Sep",
+		            "Oct",
+		            "Nov",
+		            "Dec"
+		        ],
+		        "series": [{
+		                "name": "Parsed",
+		                "data": [
+		                    0,
+		                    0,
+		                    18,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0
+		                ]
+		            },
+		            {
+		                "name": "UnParsed",
+		                "data": [
+		                    0,
+		                    0,
+		                    7,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0,
+		                    0
+		                ]
+		            }
+		        ]
+		    }
+		};
+		vm.getInvoiceDataPromise = false;
+		var graphDataCategories = invoiceData.data.categories;
+		var graphDataSeries = invoiceData.data.series;
 		var dashboardGraphOptions =  {
 		    chart: {
 		        type: 'line'
@@ -89,53 +186,21 @@ angular.module('inspinia')
 
 	// });
 
-	var dashboardPieOptions =  {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: ''
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Parsed',
-                y: 56.33
-            }, {
-                name: 'Unparsed',
-                y: 24.03,
-                sliced: true,
-                selected: true
-            }]
-        }]
-    };
+
+
+
+
+
+
+
 
     vm.latestInvoicesPromise = true;
     mainService.getLatestInvoicesDataRequest().then(function(result){
+    	console.log(result);
 		vm.latestInvoicesData = result.data.data;
 		vm.latestInvoicesPromise = false;
 
 	});
-
-	vm.dashboardPieOptions = dashboardPieOptions;
-
 
 
   });

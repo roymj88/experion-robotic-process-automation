@@ -20,12 +20,12 @@
                     <form class="m-t" name="loginForm" ng-submit="lc.doLogin(loginForm.$valid)" novalidate>
                         
                         <div class="form-group">
-                            <input name="email" type="email" class="form-control" placeholder="Email" ng-model="lc.formData.email" ng-minlength="6" required>
+                            <input name="email" type="email" class="form-control" placeholder="Email" ng-model="lc.formData.email" ng-minlength="4" required>
                             <p ng-show="loginForm.formData.email.$invalid && !loginForm.formData.email.$pristine" class="help-block">A valid email is required.</p>
 
                         </div>
                         <div class="form-group">
-                            <input name="password" type="password" class="form-control" placeholder="Password" ng-model="lc.formData.password" ng-minlength="6" required>
+                            <input name="password" type="password" class="form-control" placeholder="Password" ng-model="lc.formData.password" ng-minlength="4" required>
                             <p ng-show="loginForm.formData.password.$error.minlength" class="help-block">Password is too short.</p>
                         </div>
 

@@ -1,17 +1,16 @@
 'use strict';
 
 angular.module('inspinia')
-  .controller('AlexaController', function (alexaService) {
+  .controller('InvoicesController', function (invoicesService) {
 
     var vm = this;
 
-	alexaService.getLeaveRequest().then(function(result){
-		console.log(result)
-		vm.leaveRequestData = result.data.data;
+    vm.invoicePromise = true;
+	invoicesService.getInvoicesRequest().then(function(result){
+	    vm.invoicePromise = false;
+		vm.latestInvoicesData = result.data.data;
 	});
 
-	alexaService.getTravelRequest().then(function(result){
-		vm.travelRequestData = result.data.data;
-	});
+	
 
-  });
+});

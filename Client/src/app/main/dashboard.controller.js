@@ -207,10 +207,25 @@ angular.module('inspinia')
 	    mainService.getUserCardsDataRequest().then(function(result){
 			vm.userCardsData = result.data.data[0];
 			vm.userCardsPromise = false;
+		});
 
-			// var parsed_count = result.data.data.parsed_count;
-			// var unparsed_count = result.data.data.unparsed_count;
-			// var total = result.data.data.total_files;
+	    // Parsed List
+	    vm.parsedPromise = true;
+	    mainService.getUserParsedDataRequest().then(function(result){
+	    	console.log(result);
+			vm.parsedData = result.data.data;
+			vm.parsedPromise = false;
+
+		});
+
+
+	    // UnParsed List
+	    vm.unParsedPromise = true;
+	    mainService.getUserUnParsedDataRequest().then(function(result){
+	    	console.log(result);
+			vm.unParsedData = result.data.data;
+			vm.unParsedPromise = false;
+
 		});
 
 	}

@@ -23,7 +23,8 @@ angular.module('inspinia')
                     if(result.data.status === 1){
                         $window.localStorage.setItem('AuthCode', result.data.data.token);
                         $rootScope.AuthCode = result.data.data.token;
-                        $state.go('index.main');
+                        $rootScope.userRole = result.data.data.token;
+                        $state.go("index.main");
                     }else{
                         alert(result.data.message);
                     }

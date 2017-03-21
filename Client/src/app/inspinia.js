@@ -7,7 +7,6 @@
 
 angular.element(document).ready(function ($timeout) {
 
-
   // Full height of sidebar
   function fix_height() {
     var heightWithoutNavbar = angular.element("body > #wrapper").height() - 61;

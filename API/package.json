@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -16,6 +16,7 @@
     "http": "0.0.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^7.2.1",
+    "moment": "^2.17.1",
     "mongoose": "~4.7.5",
     "morgan": "~1.7.0",
     "nodemailer": "^2.7.0",
@@ -24,9 +25,6 @@
   },
   "description": "API for invoice parsing dashbord(RPA)",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/VishnuGurudathan"

@@ -34,13 +34,14 @@ var statementSchema = new Schema({
         type: String
     },
     processed_date : {
-        type: String
+        type: Date
     },
     file_name : {
         type: String
     }
 }, {
     versionKey: false,
+    timestamps:true,
     collection: 'statement'
 });
 

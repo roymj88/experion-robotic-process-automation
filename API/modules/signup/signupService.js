@@ -19,7 +19,7 @@ function doSignUp(req, res, cb) {
     Q.fcall(validate)
         .then(saveUser)
         .then(function(output) {
-            return cb(null, success('Successfully Registred'), Http.EVERYTHING_IS_OK)
+            return cb(null, success('Successfully Registered'), Http.EVERYTHING_IS_OK)
         })
         .fail(function(reasone){
             return cb(failure(reasone), Http.FORBIDDEN)

@@ -38,8 +38,7 @@ function get() {
 }
 
 function response(result) {
-	var response = [];
-	console.log('result--', result);
+/*	var response = [];
 	result.forEach(function(errorStatement){
 		response.push({
 			message : errorStatement.message,
@@ -47,9 +46,9 @@ function response(result) {
 			file_name : errorStatement.file_name,
 			processed_date : errorStatement.processed_date
 		});
-	});
+	});*/
 
-	return Q(response);
+	return Q(result);
 }
 
 module.exports = {

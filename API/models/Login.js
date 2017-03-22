@@ -18,14 +18,18 @@ var loginSchema = new Schema({
     emailPassword: {
         type: String
     },
+    userType: {
+        type: String,
+        enum:['A','U'],
+        default:'U'
+    },
 	status: {
         type: Boolean,
         default: false
     }
 }, {
     versionKey: false,
-    collection:'userdetails'
-    //collection: 'Login' 
+    collection:'userdetails' 
 });
 
 loginSchema.pre("save", function(next) {

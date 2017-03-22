@@ -26,12 +26,14 @@ module.exports.auth = function(req, res, next) {
         } else {
             Login.findById(decoded._id).exec().then(function(user) {
                 if (!user)
-                    return res.json(failure('We cannot authenticate the admin with this token!', HTTP.FORBIDDEN));
+                    return res.json(failure('We cannot authenticate the user with this token!', HTTP.FORBIDDEN));
         
                 req.user = {
                     _id: user._id,
                     email: user.email,
-                    name: user.name
+                    name: user.username,
+                    userType: user.userType
+                  //  isAdmin: decoded.isAdmin
                 };
                 next();
             });
@@ -39,3 +41,43 @@ module.exports.auth = function(req, res, next) {
     });
 };
 
+
+
+/* */
+
+module.exports.adminAuth = function(req, res, next) {
+    var bearerToken = req.headers.authorization;
+    if (!bearerToken)
+        return res.json(failure('Invalid Authentication Token', HTTP.FORBIDDEN));
+
+    var bearer = bearerToken.split(' ')[0].toLowerCase();
+    var token = bearerToken.split(' ')[1];
+
+    if (bearer != 'bearer' || !token)
+        return res.json(failure('Invalid Authentication Token', HTTP.FORBIDDEN));
+
+    // verifies secret and checks exp
+    jwt.verify(token, config.security.secretKey, function(err, decoded) {
+        if (err) {
+            return res.json(failure('Invalid Authentication Token', HTTP.FORBIDDEN));
+        } else {
+            Login.findById(decoded._id).exec().then(function(user) {
+                if (!user)
+                    return res.json(failure('We cannot authenticate the admin with this token!', HTTP.FORBIDDEN));
+                console.log(user.userType)    
+                if (user.userType != 'A')
+                    return res.json(failure('Access denied!', HTTP.FORBIDDEN));
+
+                req.user = {
+                    _id: user._id,
+                    email: user.email,
+                    name: user.username,
+                    userType: user.userType
+                  //  isAdmin: decoded.isAdmin
+                };
+                
+                next();
+            });
+        }
+    });
+};

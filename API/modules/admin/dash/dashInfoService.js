@@ -51,12 +51,14 @@ return Q.all([users, parsed, ErrorStatement.count().exec()]);
 }
 
 function response(users, parsed, unparsed) {
-	var response ={
-		user_count : users,
-		total_files : parsed + unparsed,
-		parsed_count : parsed,
-		unparsed_count : unparsed
-	};
+	
+	var	response={
+			user_count : users,
+			total_files : parsed + unparsed,
+			parsed_count : parsed,
+			unparsed_count : unparsed
+		};
+
 
 	return Q(response);
 }

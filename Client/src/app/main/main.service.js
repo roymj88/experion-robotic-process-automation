@@ -77,9 +77,6 @@ angular.module('inspinia')
   		}
 
 
-
-
-		
 		var getUserCardsDataObj = function() {
      		var deferred = $q.defer();
      		
@@ -121,7 +118,7 @@ angular.module('inspinia')
      		
      		var req = {
 			 	method: 'GET',
-				url: API_URL+ 'dash/unparsed/test-aegis',
+				url: API_URL+ 'dash/unparsed?username=test-aegis',
 			};
 			
 			$http(req).then(function(data){
@@ -133,6 +130,25 @@ angular.module('inspinia')
      		
      		return deferred.promise;
   		};
+
+  		var updateUnparsedDataObj = function(dataToSend){
+  			var deferred = $q.defer();
+     		
+     		var req = {
+			 	method: 'POST',
+				url: API_URL+ 'dash/unparsed/update?username=test-aegis&id=58bd3b601963fd1b00ee4dfc',
+				data: dataToSend
+			};
+			
+			$http(req).then(function(data){
+				deferred.resolve(data);
+			}, function(msg, code){
+				deferred.reject(msg);
+				$log.error(msg, code);
+			});
+     		
+     		return deferred.promise;
+  		}
   		
 
 	return {
@@ -142,7 +158,8 @@ angular.module('inspinia')
   		getParsedDataRequest: getParsedDataObj,
   		getUserCardsDataRequest: getUserCardsDataObj,
   		getUserParsedDataRequest: getUserParsedDataObj,
-  		getUserUnParsedDataRequest: getUserUnParsedDataObj
+  		getUserUnParsedDataRequest: getUserUnParsedDataObj,
+  		updateUnparsedDataRequest: updateUnparsedDataObj
 	}
 	
 });

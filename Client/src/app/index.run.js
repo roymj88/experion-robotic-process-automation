@@ -8,25 +8,52 @@
 
     angular
         .module('inspinia')
-        .constant('LOGIN_URL', 'http://localhost:5000/api/')
-        .constant('API_URL', 'http://localhost:5000/api/rpa/');
-        // .constant('API_URL', 'http://35.154.53.23:3030/api/');
+        .constant('API_URL', 'http://35.154.53.23:3030/api/rpa/');
 
 
+    angular.module('inspinia')
+        .config(function ($httpProvider) {
+            $httpProvider.interceptors.push('requestInterceptor');
+        })
+        .factory('requestInterceptor', function ($q, $rootScope, $window) {
+            return {
+                'request': function (config) {
+                    if ($window.localStorage.getItem('AuthCode')) {
+                        config.headers['Authorization'] = 'Bearer '+  $window.localStorage.getItem('AuthCode');
+                        config.headers['Accept'] = 'application/json;odata=verbose';
+                        return config;
+                    }
+                    return config || $q.when(config);
+                },
+
+                'requestError': function(rejection) {
+                    return $q.reject(rejection);
+                },
+
+                'response': function(response) {
+                    return response || $q.when(response);
+                },
+
+                'responseError': function(rejection) {
+                    return $q.reject(rejection);
+                }
+            }
+        });
 
     /** @ngInject */
-    function runBlock($log, $http, $window) {
+    function runBlock($log, $http, $window, $rootScope) {
 
         $log.debug('RunBlock Start');
-
-        if ($window.localStorage.getItem('AuthCode')) {
-            console.log($window.localStorage.getItem('AuthCode'));
-            $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.localStorage.getItem('AuthCode');
-            $http.defaults.headers.common['Accept'] = 'application/json;odata=verbose';
+        
+        if ($window.localStorage.getItem('UserType')) {
+            $rootScope.UserType = $window.localStorage.getItem('UserType');
         }
         
         $log.debug('RunBlock End');
 
     }
+
+
+
 
 })();

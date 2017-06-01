@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-	.factory('loginService', function($http, LOGIN_URL, $log, $q) {
+	.factory('loginService', function($http, API_URL, $log, $q) {
 
 		var login = function(data) {
      		
@@ -9,7 +9,7 @@ angular.module('inspinia')
 
      		var req = {
 			 	method: 'POST',
-				url: LOGIN_URL+ 'login',
+				url: API_URL+ 'login',
 				data: data
 			};
 

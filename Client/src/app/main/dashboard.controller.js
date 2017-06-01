@@ -4,9 +4,8 @@ angular.module('inspinia')
   .controller('DashboardController', function ($rootScope, $state, mainService, $timeout) {
 
     var vm = this;
-    $rootScope.userRole = "user";
 
-    if($rootScope.userRole ==="admin"){
+    if($rootScope.UserType == "A"){
 
 	    // Cards 
 	    vm.cardsPromise = true;
@@ -65,66 +64,12 @@ angular.module('inspinia')
 
 		vm.getInvoiceDataPromise = true;
 
-		// mainService.getInvoiceDataRequest().then(function(invoiceData){
-			var invoiceData = {
-			    "status": 1,
-			    "message": "Successfully loaded dash info",
-			    "code": 200,
-			    "data": {
-			        "categories": [
-			            "Jan",
-			            "Feb",
-			            "Mar",
-			            "Apr",
-			            "May",
-			            "Jun",
-			            "Jul",
-			            "Aug",
-			            "Sep",
-			            "Oct",
-			            "Nov",
-			            "Dec"
-			        ],
-			        "series": [{
-			                "name": "Parsed",
-			                "data": [
-			                    0,
-			                    0,
-			                    18,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0
-			                ]
-			            },
-			            {
-			                "name": "UnParsed",
-			                "data": [
-			                    0,
-			                    0,
-			                    7,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0,
-			                    0
-			                ]
-			            }
-			        ]
-			    }
-			};
+		mainService.getInvoiceDataRequest().then(function(invoiceData){
+			
+
 			vm.getInvoiceDataPromise = false;
-			var graphDataCategories = invoiceData.data.categories;
-			var graphDataSeries = invoiceData.data.series;
+			var graphDataCategories = invoiceData.data.data.categories;
+			var graphDataSeries = invoiceData.data.data.series;
 			var dashboardGraphOptions =  {
 			    chart: {
 			        type: 'line'
@@ -186,12 +131,11 @@ angular.module('inspinia')
 
 			vm.graphOptions = dashboardGraphOptions;
 
-		// });
+		});
 
 
 	    vm.latestInvoicesPromise = true;
 	    mainService.getLatestInvoicesDataRequest().then(function(result){
-	    	console.log(result);
 			vm.latestInvoicesData = result.data.data;
 			vm.latestInvoicesPromise = false;
 
@@ -200,8 +144,7 @@ angular.module('inspinia')
 
 
 
-
-    if($rootScope.userRole ==="user"){
+    if($rootScope.UserType == "U"){
 		// User Cards 
 	    vm.userCardsPromise = true;
 	    mainService.getUserCardsDataRequest().then(function(result){
@@ -228,6 +171,51 @@ angular.module('inspinia')
 
 		});
 
+	}
+
+	vm.edit = function(obj){
+		vm.editInvoice = obj;
+
+
+
+
+
+
+		bootbox.dialog({
+			buttons: [
+				{
+					label: "Save",
+					className: "btn btn-success",
+					callback: function() {
+
+						var dataToSend = {
+							"date_due": "03-09-2016",
+							"processed_date": "2017-02-24 17:07:08",
+							"partner_name": $('#partner_name').val(),
+							"file_name": "INV-8516-17.pdf",
+							"date_invoice": "19-08-2016",
+							"currency": "USD",
+							"amount": "7953",
+							"invoice_number": $('#invoice_number').val(),
+							"desc": "Invoice INV-85/16-17 from Experion Technologies",
+							"issuer": $('#issuer').val()
+						}
+
+						mainService.updateUnparsedDataRequest(dataToSend).then(function(result){
+					    	bootbox.alert("Successfully Updated");
+						});
+					}
+				},
+				{
+					label: "Close",
+					className: "btn btn-default",
+					callback: function() {
+
+					}
+				}
+			],
+    		message: '<div class="form-group"> <label for="Issuer">Issuer:</label> <input id="issuer" ng-model="dc.editInvoice.issuer" type="text" class="form-control"> </div><div class="form-group"> <label for="Partner">Partner:</label> <input ng-model="dc.editInvoice.partner_name" type="text" class="form-control" id="partner_name"> </div><div class="form-group"> <label for="InvoiceNo">Invoice No:</label> <input ng-model="dc.editInvoice.invoice_number" type="text" class="form-control" id="invoice_number"> </div>',
+		});
 	}
 
   });

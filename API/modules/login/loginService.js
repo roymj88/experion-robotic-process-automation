@@ -82,17 +82,19 @@ function comparePassword(userPassword, candidatePassword, cb) {
 };
 
 function generateToken(login) {
-
+	
 	var token = jwt.sign({
 		_id: login._id,
-		time: new Date().getTime()
+		time: new Date().getTime(),
+		user_type : login.userType
 	}, config.security.secretKey);
 
 	var op = {
 		_id : login._id,
 		email:login.email,
-		name:login.name,
-	    token:token
+		name:login.username,
+		user_type:login.userType,
+	        token:token
 	};
 
 	return Q(op);

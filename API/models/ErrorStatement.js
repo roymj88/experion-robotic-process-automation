@@ -17,6 +17,9 @@ var errorStatementSchema = new Schema({
     },
     username : {
         type: String
+    },
+    isParsed : {
+        type: Boolean
     }
 }, {
     versionKey: false,

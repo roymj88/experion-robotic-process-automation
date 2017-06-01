@@ -20,7 +20,6 @@ var _ = require('lodash');
 
 function getDetails(req, res, cb) {
 	locals = req;
-	console.log('123');
 	Q.fcall(getStatements)
 		.then(getErrorStatements)
 		.spread(response)
@@ -32,10 +31,9 @@ function getDetails(req, res, cb) {
 		})
 		.done();
 }
-
-
 function getStatements(){
-	return Q(Statement.find().select().exec());
+	var limit = typeof locals.params.limit !== 'undefined' ? parseInt(locals.params.limit) : 0;
+	return Q(Statement.find().select().limit(limit).exec());
 }
 
 function getErrorStatements(parsed){
@@ -58,12 +56,14 @@ function response(parsed,unparsed) {
 		});
 	});
 	_.forEach(unparsed, function(ErrorStatement){
+		if(!ErrorStatement.isParsed){
 		response.push({
 			username: ErrorStatement.username,
 			file_name: ErrorStatement.file_name,
 			processed_date: ErrorStatement.processed_date,
 			parsed : false
 		});
+		}
 	});
 
 	return Q(response);

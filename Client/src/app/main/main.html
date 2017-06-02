@@ -133,11 +133,12 @@
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead class="thead-inverse">
                                             <tr>
-                                                <th>Employee</th>
+                                                <th>User</th>
                                                 <th>File</th>
                                                 <th>Issuer</th>
                                                 <th>Partner</th>
                                                 <th>Invoice No</th>
+                                                <th>Due Date</th>
                                                 <th>Processed Date</th>
                                                 <th>Status</th>
                                             </tr>
@@ -149,6 +150,7 @@
                                                 <td>{{row.issuer}}</td>
                                                 <td>{{row.partner_name}}</td>
                                                 <td>{{row.invoice_number}}</td>
+                                                <td class="text-capitalize">{{row.due_date | date}}</td>
                                                 <td class="text-capitalize">{{row.processed_date | date}}</td>
                                                 <td class="text-capitalize">
                                                     <small ng-if="row.parsed" class="label label-primary"><i class="fa fa-check"></i> Parsed</small>
@@ -231,19 +233,23 @@
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead class="thead-inverse">
                                                 <tr>
-                                                    <th>Employee</th>
                                                     <th>Issuer</th>
                                                     <th>Partner</th>
                                                     <th>Invoice No</th>
+                                                    <th>Invoice Date</th>
+                                                    <th>Due Date</th>
+                                                    <th>Amount</th>
                                                     <th>Processed Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="row in dc.parsedData | orderBy:'processed_date' | limitTo: 10">
-                                                    <td>{{row.date_invoice | date}}</td>
                                                     <td>{{row.issuer}}</td>
                                                     <td>{{row.partner_name}}</td>
                                                     <td>{{row.invoice_number}}</td>
+                                                    <td>{{row.date_invoice | date}}</td>
+                                                    <td>{{row.due_date | date}}</td>
+                                                    <td>{{row.amount}} ({{row.currency}})</td>
                                                     <td class="text-capitalize">{{row.processed_date | date}}</td>
                                                 </tr>
                                             </tbody>
@@ -270,11 +276,13 @@
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead class="thead-inverse">
                                                 <tr>
-                                                    <th>Employee</th>
                                                     <th>File</th>
                                                     <th>Issuer</th>
                                                     <th>Partner</th>
                                                     <th>Invoice No</th>
+                                                    <th>Invoice Date</th>
+                                                    <th>Due Date</th>
+                                                    <th>Amount</th>
                                                     <th>Processed Date</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
@@ -282,11 +290,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="row in dc.unParsedData | orderBy:'processed_date' | limitTo: 10">
-                                                    <td class="text-capitalize">{{row.username}}</td>
                                                     <td class="text-capitalize">{{row.file_name}}</td>
                                                     <td>{{row.issuer}}</td>
                                                     <td>{{row.partner_name}}</td>
                                                     <td>{{row.invoice_number}}</td>
+                                                    <td class="text-capitalize">{{row.date_invoice}}</td>
+                                                    <td class="text-capitalize">{{row.due_date}}</td>
+                                                    <td class="text-capitalize">{{row.amount}} ({{row.currency}})</td>
                                                     <td class="text-capitalize">{{row.processed_date | date}}</td>
                                                     <td class="text-capitalize">
                                                         <small ng-if="row.parsed" class="label label-primary"><i class="fa fa-check"></i> Parsed</small>

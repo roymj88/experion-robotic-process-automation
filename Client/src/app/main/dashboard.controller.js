@@ -176,11 +176,6 @@ angular.module('inspinia')
 	vm.edit = function(obj){
 		vm.editInvoice = obj;
 
-
-
-
-
-
 		bootbox.dialog({
 			buttons: [
 				{
@@ -214,7 +209,7 @@ angular.module('inspinia')
 					}
 				}
 			],
-    		message: '<div class="form-group"> <label for="Issuer">Issuer:</label> <input id="issuer" ng-model="dc.editInvoice.issuer" type="text" class="form-control"> </div><div class="form-group"> <label for="Partner">Partner:</label> <input ng-model="dc.editInvoice.partner_name" type="text" class="form-control" id="partner_name"> </div><div class="form-group"> <label for="InvoiceNo">Invoice No:</label> <input ng-model="dc.editInvoice.invoice_number" type="text" class="form-control" id="invoice_number"> </div>',
+    		message: '<div class="form-group"> <label for="Issuer">Issuer:</label> <input id="issuer" ng-model="dc.editInvoice.issuer" type="text" class="form-control"> </div><div class="form-group"> <label for="Partner">Partner:</label> <input ng-model="dc.editInvoice.partner_name" type="text" class="form-control" id="partner_name"> </div><div class="form-group"> <label for="InvoiceNo">Invoice No:</label> <input ng-model="dc.editInvoice.invoice_number" type="text" class="form-control" id="invoice_number"> </div> ',
 		});
 	}
 

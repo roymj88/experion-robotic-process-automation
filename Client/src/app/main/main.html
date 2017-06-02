@@ -150,7 +150,7 @@
                                                 <td>{{row.issuer}}</td>
                                                 <td>{{row.partner_name}}</td>
                                                 <td>{{row.invoice_number}}</td>
-                                                <td class="text-capitalize">{{row.due_date | date}}</td>
+                                                <td class="text-capitalize">{{row.date_due | date}}</td>
                                                 <td class="text-capitalize">{{row.processed_date | date}}</td>
                                                 <td class="text-capitalize">
                                                     <small ng-if="row.parsed" class="label label-primary"><i class="fa fa-check"></i> Parsed</small>
@@ -248,7 +248,7 @@
                                                     <td>{{row.partner_name}}</td>
                                                     <td>{{row.invoice_number}}</td>
                                                     <td>{{row.date_invoice | date}}</td>
-                                                    <td>{{row.due_date | date}}</td>
+                                                    <td>{{row.date_due | date}}</td>
                                                     <td>{{row.amount}} ({{row.currency}})</td>
                                                     <td class="text-capitalize">{{row.processed_date | date}}</td>
                                                 </tr>
@@ -295,7 +295,7 @@
                                                     <td>{{row.partner_name}}</td>
                                                     <td>{{row.invoice_number}}</td>
                                                     <td class="text-capitalize">{{row.date_invoice}}</td>
-                                                    <td class="text-capitalize">{{row.due_date}}</td>
+                                                    <td class="text-capitalize">{{row.date_due}}</td>
                                                     <td class="text-capitalize">{{row.amount}} ({{row.currency}})</td>
                                                     <td class="text-capitalize">{{row.processed_date | date}}</td>
                                                     <td class="text-capitalize">
